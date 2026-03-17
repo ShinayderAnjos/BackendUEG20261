@@ -1,0 +1,51 @@
+package com.br.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.br.exception.ResourceNotFoundException;
+import com.br.model.Automovel;
+import com.br.repository.AutomovelRepository;
+
+@RequestMapping("/cautomovel/")
+@RestController
+@CrossOrigin(origins="*")
+public class AutomovelController {
+
+    @Autowired
+    private AutomovelRepository arep;
+	private Object mrep;
+
+    // LISTAR
+    @GetMapping("/automovel")
+    public List<Automovel> listar(){
+
+    	return ((JpaRepository<Automovel, Long>) this.mrep).findAll(Sort.by(Sort.Direction.DESC, "codigo"));
+
+    }	
+
+    // CONSULTAR
+    @GetMapping("/automovel/{id}")
+    public ResponseEntity<Automovel> consultar(@PathVariable long id){
+
+        Automovel automovel = this.arep.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Automóvel não encontrado: " + id));
+
+        return ResponseEntity.ok(automovel);
+
+    }
+
+    // INSERIR
+    @PostMapping("/automovel")
+    public Automovel inserir(@RequestBody Automovel automovel){
+
+        return this.arep.save(automovel);
+
+    }
+
+}
