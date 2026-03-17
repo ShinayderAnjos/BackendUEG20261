@@ -17,39 +17,30 @@ import com.br.exception.ResourceNotFoundException;
 import com.br.model.Marca;
 import com.br.repository.MarcaRepository;
 
-@RequestMapping("/cmarca/")
+@RequestMapping("/cmarca")
 @RestController
 @CrossOrigin(origins="*")
 public class MarcaController {
-	
-	//Cria o repositório JPA de forma automática e autogerenciado
-	@Autowired
-	private MarcaRepository mrep;
 
-	
-	//Método Listar - trazer todas as marcas do banco
-	@GetMapping("/marca")
-	public List<Marca> listar(){
-		
-		return this.mrep.findAll(Sort.by(Sort.Direction.DESC, "codigo"));
-		
-	}
-	//Método consultar - trazer uma marca, caso exista, pelo codigo
-	@GetMapping("/marca/(id)")
-	public ResponseEntity<Marca> consultar(@PathVariable long id) {
-		
-		Marca marca = this.mrep.findById(id).orElseThrow(() ->
-		new ResourceNotFoundException("Marca não encontrada:" + id));
-		
-		return ResponseEntity.ok(marca);
-		
-	}
-	
-	// Método inserir - insere uma marca
-	@PostMapping("/marca")
-	public Marca inserir(@RequestBody Marca marca) {
-		
-		return this.mrep.save(marca);
-		
-	}
+    @Autowired
+    private MarcaRepository mrep;
+
+    @GetMapping
+    public List<Marca> listar(){
+        return this.mrep.findAll(Sort.by(Sort.Direction.DESC, "codigo"));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Marca> consultar(@PathVariable Long id) {
+        Marca marca = this.mrep.findById(id).orElseThrow(() ->
+            new ResourceNotFoundException("Marca não encontrada:" + id));
+        return ResponseEntity.ok(marca);
+    }
+
+    @PostMapping
+    public Marca inserir(@RequestBody Marca marca) {
+        Marca salva = mrep.save(marca);
+        System.out.println("SALVO: " + salva.getNome());
+        return salva;
+    }
 }

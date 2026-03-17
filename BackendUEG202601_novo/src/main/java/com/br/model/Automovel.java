@@ -17,7 +17,7 @@ public class Automovel {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long codigo;
+	private Long codigo;
 	
 	@Column(name="nome")
 	private String nome;
@@ -29,10 +29,10 @@ public class Automovel {
 	private Date dataFabricacao;
 	
 	@Column(name="quantidade")
-	private double quantidade;
+	private Double quantidade;
 	
 	@Column(name="precovenda")
-	private double precoVenda;
+	private Double precoVenda;
 	
 	@Column(name="trieletrico")
 	private boolean trioEletrico;
@@ -46,7 +46,7 @@ public class Automovel {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Automovel(long codigo, String nome, String modelo, Date dataFabricacao, double quantidade, double precoVenda,
+	public Automovel(Long codigo, String nome, String modelo, Date dataFabricacao, double quantidade, double precoVenda,
 			boolean trioEletrico, Marca marca) {
 		super();
 		this.codigo = codigo;
@@ -59,11 +59,11 @@ public class Automovel {
 		this.marca = marca;
 	}
 
-	public long getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
@@ -91,7 +91,7 @@ public class Automovel {
 		this.dataFabricacao = dataFabricacao;
 	}
 
-	public double getQuantidade() {
+	public Double getQuantidade() {
 		return quantidade;
 	}
 
@@ -99,7 +99,7 @@ public class Automovel {
 		this.quantidade = quantidade;
 	}
 
-	public double getPrecoVenda() {
+	public Double getPrecoVenda() {
 		return precoVenda;
 	}
 

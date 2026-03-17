@@ -14,7 +14,7 @@ public class Marca {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private long codigo;
+	private Long codigo;
 	
 	@Column(name="nome")
 	private String nome;
@@ -24,17 +24,17 @@ public class Marca {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Marca(long codigo, String nome) {
+	public Marca(Long codigo, String nome) {
 		super();
 		this.codigo = codigo;
 		this.nome = nome;
 	}
 
-	public long getCodigo() {
+	public Long getCodigo() {
 		return codigo;
 	}
 
-	public void setCodigo(long codigo) {
+	public void setCodigo(Long codigo) {
 		this.codigo = codigo;
 	}
 
